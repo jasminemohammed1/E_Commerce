@@ -1,5 +1,6 @@
 ﻿using E_commerce.Infrastructure.Data;
 using E_commerce.Infrastructure.DataSeading;
+using E_commerce.Infrastructure.Repositories;
 using E_Commerce.Domain.Contracts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -21,6 +22,7 @@ namespace E_commerce.Infrastructure
             );
 
             service.AddKeyedScoped<IDataSeader, CatalogDataSeader>("catalog");
+            service.AddScoped<IUnitOfWork, UnitOfWork>();
 
 
 

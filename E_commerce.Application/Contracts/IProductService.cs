@@ -11,7 +11,7 @@ namespace E_commerce.Application.Contracts
     public interface IProductService
     {
         public Task<Result<IReadOnlyList<ProductDto>>> GetAllProductsAsync(CancellationToken ct = default);
-        public Task<Result<ProductDto> ?> GetProductByIdAsync(int id , CancellationToken ct = default);
+        public Task<Result<ProductDto>> GetProductByIdAsync(int id , CancellationToken ct = default);
         public Task<Result<IEnumerable<BrandDto>>> GetAllBrandAsync(CancellationToken ct = default);
         public Task<Result<IEnumerable<TypeDto>>> GetAllTypesAsync(CancellationToken ct = default);
     }
