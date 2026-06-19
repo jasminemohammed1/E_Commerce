@@ -1,5 +1,6 @@
 
 using E_commerce.API.Extensions;
+using E_commerce.Application;
 using E_commerce.Infrastructure;
 using E_Commerce.Domain.Contracts;
 using System.Threading.Tasks;
@@ -13,7 +14,9 @@ namespace E_commerce.API
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+           
             builder.Services.AddInfrastructureServices(builder.Configuration);
+            builder.Services.AddApplicationService();
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
