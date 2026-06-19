@@ -41,7 +41,7 @@ namespace E_commerce.API.Controllers
         public async Task<ActionResult<IEnumerable<TypeDto>>> GetAllTypes(CancellationToken ct)
         {
             var res = await productService.GetAllTypesAsync(ct);
-            return ToActionResult<IEnumerable<TypeDto>>(res);
+            return ToActionResult(res);
         }
 
         // GetAllBrands

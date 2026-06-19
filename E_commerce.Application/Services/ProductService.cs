@@ -39,7 +39,7 @@ namespace E_commerce.Application.Services
 
         public async Task<Result<IEnumerable<TypeDto>>> GetAllTypesAsync(CancellationToken ct = default)
         {
-            var types = await unitOfWork.GetRepository<ProductBrand, int>().GetAllAync(ct);
+            var types = await unitOfWork.GetRepository<ProductType, int>().GetAllAync(ct);
             var res = mapper.Map<IEnumerable<TypeDto>>(types);
             return Result<IEnumerable<TypeDto>>.Ok(res);
         }
