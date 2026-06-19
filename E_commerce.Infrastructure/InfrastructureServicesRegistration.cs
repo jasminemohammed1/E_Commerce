@@ -1,4 +1,6 @@
 ﻿using E_commerce.Infrastructure.Data;
+using E_commerce.Infrastructure.DataSeading;
+using E_Commerce.Domain.Contracts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +19,8 @@ namespace E_commerce.Infrastructure
             service.AddDbContext<StoreDbContext>( opts => 
             opts.UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
             );
+
+            service.AddKeyedScoped<IDataSeader, CatalogDataSeader>("catalog");
 
 
 
