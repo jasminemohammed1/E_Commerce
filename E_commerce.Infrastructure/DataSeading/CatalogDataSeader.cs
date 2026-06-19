@@ -55,7 +55,7 @@ namespace E_commerce.Infrastructure.DataSeading
            
         }
 
-       private async Task SeadIfEmptyAsync<T , Tkey>(string rootPath , string fileName,CancellationToken ct) where T : BaseEntity<Tkey>
+       private async Task SeadIfEmptyAsync<T,Tkey>(string rootPath , string fileName,CancellationToken ct) where T : BaseEntity<Tkey>
         {
             var fullpath = Path.Combine(rootPath, fileName);
           

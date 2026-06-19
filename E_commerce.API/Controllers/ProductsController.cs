@@ -6,9 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace E_commerce.API.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ProductsController : ControllerBase
+  
+    public class ProductsController : ApiBaseController
     {
         private readonly IProductService productService;
 
@@ -19,37 +18,38 @@ namespace E_commerce.API.Controllers
         // GetAllProducts
 
         [HttpGet]
-        public async Task<ActionResult<Result<IReadOnlyList<ProductDto>>>>GetAllProducts(CancellationToken ct)
+        public async Task<ActionResult<IReadOnlyList<ProductDto>>>GetAllProducts(CancellationToken ct)
         {
             var res = await productService.GetAllProductsAsync(ct);
-            return Ok(res);
+            return ToActionResult(res);
         }
         // GetProductById
-
+        [ProducesResponseType(typeof(ProductDto) , StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProblemDetails) , StatusCodes.Status404NotFound)]
         [HttpGet("{id}")]
 
-        public async Task<ActionResult<Result<ProductDto>>> GetProduct(int id , CancellationToken ct )
+        public async Task<ActionResult<ProductDto>> GetProduct(int id , CancellationToken ct )
         {
             var res = await productService.GetProductByIdAsync(id, ct);
-            return Ok(res);
+            return ToActionResult(res);
 
         }
         //GetAllTypes
 
         [HttpGet("types")]
 
-        public async Task<ActionResult<Result<IEnumerable<TypeDto>>>> GetAllTypes(CancellationToken ct)
+        public async Task<ActionResult<IEnumerable<TypeDto>>> GetAllTypes(CancellationToken ct)
         {
             var res = await productService.GetAllTypesAsync(ct);
-            return Ok(res);
+            return ToActionResult<IEnumerable<TypeDto>>(res);
         }
 
         // GetAllBrands
         [HttpGet("brandes")]
-        public async Task<ActionResult<Result<IEnumerable<TypeDto>>>> GetAllBrandes(CancellationToken ct)
+        public async Task<ActionResult<IEnumerable<BrandDto>>>GetAllBrandes(CancellationToken ct)
         {
             var res = await productService.GetAllBrandAsync(ct);
-            return Ok(res);
+            return ToActionResult(res);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using System.Text.Json.Serialization;
 
 namespace E_commerce.Application.Common
 {
@@ -18,6 +19,7 @@ namespace E_commerce.Application.Common
 
     }
 
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum ErrorType
     {
         Failure = 0 ,
