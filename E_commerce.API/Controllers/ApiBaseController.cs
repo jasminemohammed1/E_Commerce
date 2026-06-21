@@ -16,11 +16,11 @@ namespace E_commerce.API.Controllers
             }
             else
             {
-               return  ToProblem(result.Errors);
+               return ToProblem(result.Errors);
             }
         }
 
-        public static  ActionResult ToActionResult(Result result)
+        public static ActionResult ToActionResult(Result result)
         {
             if(result.IsSucesss)
             {

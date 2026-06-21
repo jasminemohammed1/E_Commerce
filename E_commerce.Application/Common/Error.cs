@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace E_commerce.Application.Common
 {
-    public record Error(string Code , string Description , ErrorType ErrorType = ErrorType.Failure )
+    public sealed record Error(string Code , string Description , ErrorType ErrorType = ErrorType.Failure )
     {
 
         public static Error Failure(string code = "General.Failure", string description = "General.Failure Error has occured") => new Error(code, description, ErrorType.Failure);

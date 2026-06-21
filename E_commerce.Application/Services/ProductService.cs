@@ -51,7 +51,7 @@ namespace E_commerce.Application.Services
                 return Result<ProductDto>.Fail(Error.NotFound("Product not found", $"Product with id {id} is not found"));
             var res = mapper.Map<ProductDto>(product);
 
-            return res;
+            return Result<ProductDto>.Ok(res);
         }
     }
 }
