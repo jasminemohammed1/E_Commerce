@@ -11,5 +11,6 @@ namespace E_Commerce.Domain.Specifications
     public interface ISpecification<TEntity, TKey> where TEntity : BaseEntity<TKey>
     {
         ICollection<Expression<Func<TEntity,object>>> IncludesExperrsions { get; }
+        Expression<Func<TEntity , bool>> Criteria { get; }
     }
 }

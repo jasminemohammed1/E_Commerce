@@ -31,9 +31,9 @@ namespace E_commerce.Application.Services
 
         }
 
-        public async Task<Result<IReadOnlyList<ProductDto>>> GetAllProductsAsync(CancellationToken ct = default)
+        public async Task<Result<IReadOnlyList<ProductDto>>> GetAllProductsAsync(int? BrandId, int? TypeId, CancellationToken ct = default)
         {
-            var spec = new ProductWithBrandsAndTypes();
+            var spec = new ProductWithBrandsAndTypes(BrandId , TypeId);
             var products =  await unitOfWork.GetRepository<Product, int>().GetAllAync(spec,ct);
             var res = mapper.Map<IReadOnlyList<ProductDto>>(products);
             return Result<IReadOnlyList<ProductDto>>.Ok(res);
@@ -47,8 +47,9 @@ namespace E_commerce.Application.Services
         }
 
         public async Task<Result<ProductDto>> GetProductByIdAsync(int id, CancellationToken ct = default)
-        { 
-           var product = await unitOfWork.GetRepository<Product, int>().GetByIdAsync(id , ct);
+        {
+            var spec = new ProductWithBrandsAndTypes(id);
+            var product = await unitOfWork.GetRepository<Product, int>().GetByIdAsync(spec , ct);
             if (product == null)
                 return Result<ProductDto>.Fail(Error.NotFound("Product not found", $"Product with id {id} is not found"));
             var res = mapper.Map<ProductDto>(product);

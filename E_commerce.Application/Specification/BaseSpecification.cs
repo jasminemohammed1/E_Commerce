@@ -14,6 +14,14 @@ namespace E_commerce.Application.Specification
     {
         public ICollection<Expression<Func<TEntity, object>>> IncludesExperrsions { get; } = [];
 
+        public Expression<Func<TEntity, bool>> Criteria { get; private set; }
+
+
+        protected BaseSpecification(Expression<Func<TEntity , bool>> criteria)
+        {
+            Criteria = criteria;
+        }
+
         protected void AddInclude(Expression<Func<TEntity , object>> exp)
         {
             IncludesExperrsions.Add(exp);

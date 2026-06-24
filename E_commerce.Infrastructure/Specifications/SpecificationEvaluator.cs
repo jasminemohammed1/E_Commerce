@@ -16,6 +16,10 @@ namespace E_commerce.Infrastructure.Specifications
         where TEntity : BaseEntity<TKey>
         {
             var inputQuery = input;
+            if(specification.Criteria is not null)
+            {
+               inputQuery =  inputQuery.Where(specification.Criteria);
+            }
             if (specification.IncludesExperrsions.Any())
             {
                 inputQuery = specification.IncludesExperrsions.Aggregate(inputQuery, (curr, next) => curr.Include(next));
