@@ -24,7 +24,15 @@ namespace E_commerce.Infrastructure.Specifications
             {
                 inputQuery = specification.IncludesExperrsions.Aggregate(inputQuery, (curr, next) => curr.Include(next));
             }
-            return inputQuery; 
+            if(specification.SortAsc is not null)
+            {
+                inputQuery = inputQuery.OrderBy(specification.SortAsc);
+            }
+            else if(specification.SortDesc is not null)
+            {
+                inputQuery = inputQuery.OrderByDescending(specification.SortDesc);  
+            }
+                return inputQuery; 
         }
     }
 }

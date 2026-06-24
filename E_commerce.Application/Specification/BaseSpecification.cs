@@ -16,16 +16,29 @@ namespace E_commerce.Application.Specification
 
         public Expression<Func<TEntity, bool>> Criteria { get; private set; }
 
+        public Expression<Func<TEntity, object>>? SortAsc { get; private set; }
+
+        public Expression<Func<TEntity, object>>? SortDesc {  get; private set; }
 
         protected BaseSpecification(Expression<Func<TEntity , bool>> criteria)
         {
             Criteria = criteria;
         }
-
+        protected void AddOrderby(Expression<Func<TEntity , object>> orderBy)
+        {
+            
+            SortAsc = orderBy;
+        }
+        protected void AddOrderbyDesc(Expression<Func<TEntity, object>> orderBy)
+        {
+            SortDesc = orderBy; 
+        }
         protected void AddInclude(Expression<Func<TEntity , object>> exp)
         {
             IncludesExperrsions.Add(exp);
         }
+
+        
     }
     
 }
