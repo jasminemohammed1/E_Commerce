@@ -14,5 +14,8 @@ namespace E_Commerce.Domain.Specifications
         Expression<Func<TEntity , bool>> Criteria { get; }
         Expression<Func<TEntity , Object>>? SortAsc { get; }
         Expression<Func<TEntity , Object>>? SortDesc { get; }
+        int Take {  get; }
+        int Skip { get; }
+        bool IsPaginated { get; }
     }
 }

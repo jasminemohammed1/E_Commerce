@@ -32,6 +32,11 @@ namespace E_commerce.Infrastructure.Specifications
             {
                 inputQuery = inputQuery.OrderByDescending(specification.SortDesc);  
             }
+
+            if(specification.IsPaginated)
+            {
+                inputQuery = inputQuery.Skip(specification.Skip).Take(specification.Take);  
+            }
                 return inputQuery; 
         }
     }

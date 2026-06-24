@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Net.Security;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,9 +21,22 @@ namespace E_commerce.Application.Specification
 
         public Expression<Func<TEntity, object>>? SortDesc {  get; private set; }
 
+        public int Take { get; private set; }
+
+        public int Skip { get; private set; }
+
+        public bool IsPaginated { get; private set; } 
+
         protected BaseSpecification(Expression<Func<TEntity , bool>> criteria)
         {
             Criteria = criteria;
+        }
+        protected void ApplyPagination(int pageSize , int pageIndex)
+        {
+           Take = pageSize;
+           Skip = (pageIndex -1) * pageSize;
+            IsPaginated = true;
+
         }
         protected void AddOrderby(Expression<Func<TEntity , object>> orderBy)
         {
