@@ -2,6 +2,7 @@
 using E_commerce.Application.Common;
 using E_commerce.Application.Contracts;
 using E_commerce.Application.DTOs.Products;
+using E_commerce.Application.Specification;
 using E_Commerce.Domain.Contracts;
 using E_Commerce.Domain.Entities.Products;
 using System;
@@ -24,7 +25,7 @@ namespace E_commerce.Application.Services
         }
         public async Task<Result<IEnumerable<BrandDto>>> GetAllBrandAsync(CancellationToken ct = default)
         {
-           var brands = await  unitOfWork.GetRepository<ProductBrand , int>().GetAllAync(ct);
+            var brands = await unitOfWork.GetRepository<ProductBrand, int>().GetAllAync(ct);
            var res =  mapper.Map<IEnumerable<BrandDto>>(brands);
             return Result<IEnumerable<BrandDto>>.Ok(res);
 
@@ -32,7 +33,8 @@ namespace E_commerce.Application.Services
 
         public async Task<Result<IReadOnlyList<ProductDto>>> GetAllProductsAsync(CancellationToken ct = default)
         {
-            var products =  await unitOfWork.GetRepository<Product, int>().GetAllAync(ct);
+            var spec = new ProductWithBrandsAndTypes();
+            var products =  await unitOfWork.GetRepository<Product, int>().GetAllAync(spec,ct);
             var res = mapper.Map<IReadOnlyList<ProductDto>>(products);
             return Result<IReadOnlyList<ProductDto>>.Ok(res);
         }
