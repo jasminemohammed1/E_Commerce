@@ -24,6 +24,7 @@ namespace E_commerce.Infrastructure
 
             service.AddKeyedScoped<IDataSeader, CatalogDataSeader>("catalog");
             service.AddScoped<IUnitOfWork, UnitOfWork>();
+            service.AddScoped<IBasketRepository , BasketRepository>();  
             service.AddSingleton<IConnectionMultiplexer>(config =>
             {
               return  ConnectionMultiplexer.Connect(configuration.GetConnectionString("RedisConnection")!);
