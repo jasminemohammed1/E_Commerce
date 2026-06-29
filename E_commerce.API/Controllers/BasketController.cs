@@ -36,7 +36,7 @@ namespace E_commerce.API.Controllers
             return ToActionResult(res);
 
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<ActionResult<bool>> DeleteBasket(string id , CancellationToken ct )
         {
             var res =await  basketService.DeleteBasketAsync(id, ct);
